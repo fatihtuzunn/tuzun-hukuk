@@ -19,7 +19,7 @@ const Blog = async () => {
   const data = await getData();
   return (
     <div className={styles.mainContainer}>
-      {data.map((item) => (
+      {data.slice(0).reverse().map((item) => (
         <Link href={`/blog/${item._id}`} className={styles.container} key={item.id}>
           <div className={styles.imageContainer}>
             <Image

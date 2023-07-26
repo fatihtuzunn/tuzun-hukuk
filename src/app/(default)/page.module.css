@@ -34,17 +34,23 @@
   }
 }
 
-
-
 .desc {
   font-size: 24px;
   font-weight: 300;
 }
 
-@media only screen and (max-width: 800px) {
-.container{
-  flex-direction: column;
-  
+.contactDesc {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: justify;
+  margin: 70px;
 }
 
+@media only screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+  .contactDesc {
+    margin: 30px 0 0 0;
+  }
 }

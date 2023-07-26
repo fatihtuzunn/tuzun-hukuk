@@ -50,7 +50,8 @@ const handler = NextAuth({
   ],
   pages: {
     error: "/dashboard/login",
-  },
+
+  }
 
 });
 

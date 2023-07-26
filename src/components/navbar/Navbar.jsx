@@ -6,7 +6,7 @@ import styles from "./navbar.module.css";
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { Box, Divider, Drawer, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from "@mui/material";
+import { Button, MenuItem, Menu, Box, Divider, Drawer, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { blue } from "@mui/material/colors";
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,8 +19,8 @@ const links = [
   },
   {
     id: 2,
-    title: "Portfolio",
-    url: "/portfolio",
+    title: "Hakkımızda",
+    url: "/hakkimizda",
   },
   {
     id: 3,
@@ -29,16 +29,21 @@ const links = [
   },
   {
     id: 4,
-    title: "About",
-    url: "/about",
+    title: "Araçlar",
+    url: "/araclar",
   },
   {
     id: 5,
-    title: "Contact",
-    url: "/contact",
+    title: "portfoli",
+    url: "/portfolio",
   },
   {
     id: 6,
+    title: "İletişim",
+    url: "/iletisim",
+  },
+  {
+    id: 7,
     title: "Dashboard",
     url: "/dashboard",
   },
@@ -47,6 +52,11 @@ const links = [
 const Navbar = () => {
   const [colorChange, setColorchange] = React.useState(false);
   const [drawer, setDrawer] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openAraclar = Boolean(anchorEl);
+
+
+
   const session = useSession();
   const pathname = usePathname()
   const theme = useTheme();
@@ -61,7 +71,13 @@ const Navbar = () => {
       setColorchange(false);
     }
   };
-  window.addEventListener('scroll', changeNavbarColor);
+
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeNavbarColor);
+
+
+  }, []);
 
 
 
@@ -83,6 +99,7 @@ const Navbar = () => {
         lamamia {pathname}
       </Link>
       <div className={styles.links}>
+
         {matches ? (
           <Box>
             <IconButton
@@ -132,6 +149,31 @@ const Navbar = () => {
           </Box>
         ) : <>
           <DarkModeToggle />
+
+          <div>
+            <Button
+              id="basic-button"
+              aria-controls={openAraclar ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={openAraclar ? 'true' : undefined}
+              onMouseEnter={(event) => setAnchorEl(event.currentTarget)}
+
+              style={{ cursor: "pointer" }}
+            >
+              Dashboard
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openAraclar}
+              onClose={() => setAnchorEl(false)}
+            >
+              <Link href="/araclar/arabuluculuk"><MenuItem >Profile</MenuItem></Link>
+              <Link href="/araclar/vekalet"><MenuItem >Profile</MenuItem></Link>
+
+            </Menu>
+          </div>
+
           {links.map((link) => (
             <Link key={link.id} href={link.url} className={styles.link}>
               {link.title}

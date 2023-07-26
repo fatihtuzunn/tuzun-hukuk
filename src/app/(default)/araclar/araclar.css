@@ -1,0 +1,4 @@
+.aracContainer {
+  display: flex;
+  flex-direction: column;
+}
